@@ -1,0 +1,37 @@
+  <%
+  function active(page, data) {
+    if(page === data) return 'active';
+    if(~url.indexOf('/' + page)) return 'active';
+    return '';
+  }
+  %>
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list"> 
+              <li class="nav-header">Admin Menu</li>        
+              <li class="<%= active('dashboard', url) %>">
+                <a href="/dashboard"><i class="icon-home"></i> Dashboard</a>
+              </li>
+              <li class="<%= active('users', url)%>">
+                <a href="/users#/list"><i class="icon-user"></i> Users</a>
+              </li>
+              <li class="<%= active('permits', url)%>">
+                <a href="/permits"><i class="icon-lock"></i> Permits</a>
+              </li>
+              <li class="<%= active('apps', url)%>">
+                <a href="/apps"><i class="icon-pencil"></i> Apps</a>
+              </li>
+              <li>
+                <a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a>
+              </li>
+              <li>
+                <a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="/settings"><i class="icon-comment"></i> Settings</a>
+              </li>
+              <li>
+                <a href="/logout"><i class="icon-share"></i> Logout</a>
+              </li>
+            </ul>
+          </div><!--/.well -->

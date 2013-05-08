@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    var sortingOrder = 'username';
+</script>
+<div class="btn-toolbar">
+    <a href="#/create" class="btn btn-primary" ng-click="createUser()">New User</a>
+    <button class="btn">Import</button>
+    <button class="btn">Export</button>
+    <div class="input-append" style="margin-bottom:0px;margin-left: 5px;"><input type="text" ng-model="query" ng-change="search()"><span class="add-on"><i class="icon-search"></i></span></div>
+</div>
+<div class="well">
+    <table class="table table-striped table-condensed table-hover">
+      <thead>
+        <tr>
+          <th class="id">#&nbsp;<a ng-click="sort_by('id')"><i class="icon-sort"></i></a></th>
+          <th class="first">First Name&nbsp;<a ng-click="sort_by('first')"><i class="icon-sort"></i></a></th>
+          <th class="last">Last Name&nbsp;<a ng-click="sort_by('last')"><i class="icon-sort"></i></a></th>
+          <th class="username">Username&nbsp;<a ng-click="sort_by('username')"><i class="icon-sort"></i></a></th>
+          <th class="status">Status</th>
+          <th style="width: 36px;"></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <td colspan="6">
+          <div class="pagination pull-right">
+            <ul>
+              <li ng-class="{disabled: currentPage == 0}"><a href ng-click="prevPage()">« Prev</a></li>
+              <li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}" ng-click="setPage()"><a href ng-bind="n + 1">1</a></li>
+              <li ng-class="{disabled: currentPage == pagedItems.length - 1}"><a href ng-click="nextPage()">Next »</a></li>
+            </ul>
+          </div>
+        </td>
+      </tfoot>
+      <tbody>
+        <tr ng-repeat="user in pagedItems[currentPage] | orderBy:sortingOrder:reverse">
+          <td>{{user.id}}</td>
+          <td>{{user.first}}</td>
+          <td>{{user.last}}</td>
+          <td>{{user.username}}</td>
+          <td><span class="label label-success">Active</span></td>
+          <td>
+              <a href="user.html"><i class="icon-pencil"></i></a>
+              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+</div>
+<!--
+<pagination num-pages="noOfPages" current-page="currentPage" class="pagination-small"></pagination>
+<div class="pagination">
+    <ul>
+        <li><a href="#">Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+</div>
+-->
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text">Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>
